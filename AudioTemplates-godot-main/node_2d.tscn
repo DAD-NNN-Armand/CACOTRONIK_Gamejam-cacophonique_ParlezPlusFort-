@@ -1,0 +1,67 @@
+[gd_scene load_steps=6 format=3 uid="uid://dyutspjj044p1"]
+
+[ext_resource type="Script" uid="uid://drxhmfhafohap" path="res://scripts/mic_pitch_detection.gd" id="1_epypp"]
+[ext_resource type="Texture2D" uid="uid://ch5d5hgkptaqv" path="res://Dragon.jpg" id="1_wtcfe"]
+[ext_resource type="Script" uid="uid://davuqx8tvmwgs" path="res://scripts/something_great.gd" id="2_0e48y"]
+[ext_resource type="AudioStream" uid="uid://1xiqpncjtxkc" path="res://audio/ding.mp3" id="4_0hol4"]
+
+[sub_resource type="AudioStreamMicrophone" id="AudioStreamMicrophone_epypp"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_epypp")
+min_freq = 10.0
+magnitude_threshold = 0.001
+
+[node name="TimerUpdate" type="Timer" parent="."]
+wait_time = 0.00999999999999999
+autostart = true
+
+[node name="MicPlayer" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamMicrophone_epypp")
+autoplay = true
+bus = &"Mic"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(400, 600)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_wtcfe")
+script = ExtResource("2_0e48y")
+
+[node name="Black_screen" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="Black_screen"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.011764706, 0.011764706, 0.011764706, 1)
+
+[node name="Label" type="Label" parent="Black_screen"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -142.0
+offset_top = -11.5
+offset_right = 142.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "my mom is really cool #Ilovemymom"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ResultSounds" type="AudioStreamPlayer" parent="."]
+
+[node name="TooHightSound" type="AudioStreamPlayer" parent="ResultSounds"]
+
+[node name="DingSound" type="AudioStreamPlayer" parent="ResultSounds"]
+stream = ExtResource("4_0hol4")
+
+[node name="TooLowSound" type="AudioStreamPlayer" parent="ResultSounds"]
+
+[node name="Questions" type="AudioStreamPlayer" parent="."]
+
+[connection signal="note_detected" from="." to="Sprite2D" method="_on_node_2d_note_detected"]

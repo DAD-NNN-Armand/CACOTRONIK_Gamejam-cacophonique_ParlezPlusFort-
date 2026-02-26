@@ -1,0 +1,49 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="Godot-audio-templates"
+run/main_scene="res://scenes/pitch_detection_scene.tscn"
+config/features=PackedStringArray("4.5", "Mobile")
+config/icon="res://textures/icon.svg"
+
+[audio]
+
+buses/default_bus_layout="res://audio/default_bus_layout.tres"
+driver/enable_input=true
+
+[editor]
+
+movie_writer/video_quality=0.95
+movie_writer/movie_file="res://records/session.avi"
+
+[input]
+
+up={
+"deadzone": 0.2,
+"events": []
+}
+left={
+"deadzone": 0.2,
+"events": []
+}
+right={
+"deadzone": 0.2,
+"events": []
+}
+bottom={
+"deadzone": 0.2,
+"events": []
+}
+
+[rendering]
+
+renderer/rendering_method="mobile"
